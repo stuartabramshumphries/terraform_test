@@ -1,3 +1,4 @@
 .terr*
 *state*
 .*swp
+*.cp
