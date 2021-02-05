@@ -1,5 +1,6 @@
 provider "aws" {
-  region = "eu-west-2"
+  region = var.aws_region
+  profile = "stumain"
 }
 
 resource "aws_security_group" "web-node" {
@@ -30,10 +31,11 @@ resource "aws_security_group" "web-node" {
 
 
 resource "aws_instance" "example" {
-  ami           = "ami-098828924dc89ea4a"
+  ami           = var.aws_amis
   instance_type = "t2.micro"
+  availability_zone = var.availability_zone
   security_groups = [aws_security_group.web-node.name]
-  key_name = "tf_lon"
+  key_name = var.key_name
 
   user_data = <<-EOF
            #!/bin/bash
