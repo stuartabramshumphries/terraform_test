@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 
+variable "aws_profile" {
+  description = "AWS profile"
+  default = "stumain"
+}
+
 variable "key_name" {
   description = "key name to add to server"
   default     = "tf_lon"
@@ -18,6 +23,6 @@ variable "availability_zone" {
 }
 
 variable "aws_amis" {
-  default = "ami-098828924dc89ea4a"
+  default = "ami-063a939f366c8da70"
 }
 
