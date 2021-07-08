@@ -36,12 +36,11 @@ resource "aws_instance" "example" {
   availability_zone = var.availability_zone
   security_groups = [aws_security_group.web-node.name]
   key_name = var.key_name
-
   user_data = <<-EOF
-           #!/bin/bash
-           echo "Hello, Stuart" > /etc/motd2
+         #!/bin/bash
+         echo "Hello, Stuart" > /etc/motd2
+         EOF
   tags = {
     Name = "stuart-terraform-playground"
   }
 }
-
