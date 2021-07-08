@@ -1,10 +1,6 @@
 provider "aws" {
   region = var.aws_region
-<<<<<<< HEAD
-  profile = "stumain"
-=======
   profile = var.aws_profile
->>>>>>> master
 }
 
 resource "aws_security_group" "web-node" {
@@ -44,18 +40,8 @@ resource "aws_instance" "example" {
   user_data = <<-EOF
            #!/bin/bash
            echo "Hello, Stuart" > /etc/motd2
-<<<<<<< HEAD
-           yum -y install httpd
-           systemctl enable httpd
-           systemctl start httpd
-           EOF
-  tags = {
-    Name = "stuart-terraform-example"
-=======
-           EOF
   tags = {
     Name = "stuart-terraform-playground"
->>>>>>> master
   }
 }
 
