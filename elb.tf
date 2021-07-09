@@ -10,7 +10,7 @@ resource "aws_elb" "stuweb" {
 #  }
 
   listener {
-    instance_port     = 8000
+    instance_port     = 80
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
@@ -20,17 +20,24 @@ resource "aws_elb" "stuweb" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:8000/"
+    target              = "HTTP:80/"
     interval            = 30
   }
 
-#  instances                   = [aws_instance.example.[{count.index}]]
-#  cross_zone_load_balancing   = true
-#  idle_timeout                = 400
-#  connection_draining         = true
-#  connection_draining_timeout = 400
+  instances                   = "${aws_instance.example.*.id}"
+  cross_zone_load_balancing   = true
+  idle_timeout                = 400
+  connection_draining         = true
+  connection_draining_timeout = 400
+
 
   tags = {
     Name = "stuweb-terraform-elb"
   }
+}
+
+output "elb_dns_name" {
+  description = "The DNS name of the ELB"
+#  value       = aws_elb.stuweb.*.elb_dns_name
+   value       = aws_elb.stuweb.dns_name
 }
