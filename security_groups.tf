@@ -1,4 +1,4 @@
-resource "aws_security_group" "web-node" {
+resource "aws_security_group" "web-node1" {
   name        = "web-node"
   description = "Web and SSH sec group"
 
