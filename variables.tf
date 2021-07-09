@@ -26,3 +26,16 @@ variable "aws_amis" {
   default = "ami-063a939f366c8da70"
 }
 
+variable "instance_count" {
+  default = 0
+}
+
+variable "zones" {
+  description = "for multi zone deployment"
+  default = ["eu-west-2a","eu-west-2b","eu-west-2c"]
+}
+
+variable "zone" {
+  description = "for single zone deployment"
+  default     = ""
+}
