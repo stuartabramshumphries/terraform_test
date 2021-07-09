@@ -1,10 +1,20 @@
 provider "aws" {
-  region = var.aws_region
+  region  = var.aws_region
   profile = var.aws_profile
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "saah-lockfile"
+    key            = "global/s3/terraform.tfstate"
+    region         = "eu-west-2"
+    dynamodb_table = "saah-db-lock"
+    encrypt        = true
+  }
+}
+
 resource "aws_security_group" "web-node" {
-  name = "web-node"
+  name        = "web-node"
   description = "Web and SSH sec group"
 
   ingress {
@@ -14,29 +24,29 @@ resource "aws_security_group" "web-node" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }    
+  }
 
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 
 resource "aws_instance" "example" {
-  ami           = var.aws_amis
-  instance_type = "t2.micro"
+  ami               = var.aws_amis
+  instance_type     = "t2.micro"
   availability_zone = var.availability_zone
-  security_groups = [aws_security_group.web-node.name]
-  key_name = var.key_name
-  user_data = <<-EOF
+  security_groups   = [aws_security_group.web-node.name]
+  key_name          = var.key_name
+  user_data         = <<-EOF
          #!/bin/bash
          echo "Hello, Stuart" > /etc/motd2
          EOF

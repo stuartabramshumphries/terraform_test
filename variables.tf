@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "aws_profile" {
   description = "AWS profile"
-  default = "stumain"
+  default     = "stumain"
 }
 
 variable "key_name" {
