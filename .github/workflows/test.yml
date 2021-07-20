@@ -1,6 +1,8 @@
 # This is a basic workflow to help you get started with Actions
+# basic github action
+# stuart aa humphries
 
-name: CI
+name: TEST
 
 # Controls when the workflow will run
 on:
